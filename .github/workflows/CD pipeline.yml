@@ -15,8 +15,10 @@ jobs:
 
       - name: SSH 키 설정
         run: |
-         echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
-         chmod 600 key.pem
+          cat > key.pem << 'EOF'
+          ${{ secrets.EC2_SSH_KEY }}
+          EOF
+          chmod 600 key.pem
 
       - name: 애플리케이션 파일 전송
         run: |
@@ -29,10 +31,10 @@ jobs:
       - name: EC2에서 애플리케이션 배포
         run: |
           ssh -i key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
-          cd ~/app
-          docker compose down
-          docker compose build
-          docker compose up -d
+            cd ~/app
+            docker compose down
+            docker compose build
+            docker compose up -d
           ENDSSH
 
       - name: SSH 키 삭제
