@@ -19,15 +19,15 @@ jobs:
          chmod 600 key.pem
 
       - name: 애플리케이션 파일 전송
-          run: |
+        run: |
           rsync -avz -e "ssh -i key.pem -o StrictHostKeyChecking=no" \
-          --exclude='.git/' \
-          --exclude='node_modules/' \
-          --exclude='db.sqlite3' \
-          ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/app/
+           --exclude='.git/' \
+           --exclude='node_modules/' \
+           --exclude='db.sqlite3' \
+           ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/app/
 
       - name: EC2에서 애플리케이션 배포
-          run: |
+        run: |
           ssh -i key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
           cd ~/app
           docker compose down
