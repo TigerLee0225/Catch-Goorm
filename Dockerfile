@@ -16,6 +16,19 @@ RUN apt-get update && apt-get install -y \
 # pip 업그레이드
 RUN python -m pip install --upgrade pip
 
+#권한 설정
+RUN chmod +x /app/manage.python
+
+#포트 노출
+EXPOSE 8000
+
+#애플리케이션 사용자 생성
+RUN useradd -m appuser
+RUN chown -R appuser /app
+
+#사용자 전환
+USER appuser
+
 # 필요 패키지 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
