@@ -24,7 +24,7 @@ EXPOSE 8000
 
 #애플리케이션 사용자 생성 및 권한 설정
 RUN useradd -m appuser
-RUN mkdir /app/db && chown -R appuser /app
+RUN chown -R appuser /app
 
 #사용자 전환
 USER appuser
