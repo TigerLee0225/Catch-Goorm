@@ -15,9 +15,7 @@ jobs:
 
       - name: SSH 키 설정
         run: |
-          cat > key.pem << 'EOF'
-          ${{ secrets.EC2_SSH_KEY }}
-          EOF
+          echo "${{ secrets.EC2_SSH_KEY_BASE64 }}" | base64 -d > key.pem
           chmod 600 key.pem
 
       - name: 애플리케이션 파일 전송
