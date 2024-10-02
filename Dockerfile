@@ -16,15 +16,9 @@ RUN apt-get update && apt-get install -y \
 # pip 업그레이드
 RUN python -m pip install --upgrade pip
 
-#권한 설정
-RUN chmod +x /app/manage.py
-
-#포트 노출
-EXPOSE 8000
-
 #애플리케이션 사용자 생성 및 권한 설정
 RUN useradd -m appuser
-RUN chown -R appuser /app
+RUN mkdir /app/db && chown -R appuser /app
 
 #사용자 전환
 USER appuser
@@ -35,6 +29,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 소스 코드 복사
 COPY . .
+
+#권한 설정
+RUN chmod +x /app/manage.py
+
+#포트 노출
+EXPOSE 8000
 
 # 컨테이너 실행 시 Django 서버를 Gunicorn으로 실행
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "User_service.wsgi:application"]
