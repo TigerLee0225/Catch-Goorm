@@ -22,9 +22,9 @@ RUN chmod +x /app/manage.py
 #포트 노출
 EXPOSE 8000
 
-#애플리케이션 사용자 생성
+#애플리케이션 사용자 생성 및 권한 설정
 RUN useradd -m appuser
-RUN chown -R appuser /app
+RUN mkdir /app/db && chown -R appuser /app
 
 #사용자 전환
 USER appuser
