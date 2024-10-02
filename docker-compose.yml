@@ -31,6 +31,7 @@ volumes:
   media_volume:  # 미디어 파일 저장소 추가
 
 
+
 # version: '3.8'
 
 # services:
