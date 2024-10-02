@@ -2,10 +2,10 @@ services:
   web:
     build: .
     volumes:
-#      - .:/app
+      - .:/app
       - static_volume:/app/static
       - media_volume:/app/media  # 미디어 파일 경로 추가
-#      - ./db.sqlite3:/app/db.sqlite3  # SQLite 데이터베이스 파일
+      - ./db.sqlite3:/app/db.sqlite3  # SQLite 데이터베이스 파일
     expose:
       - "8000"
     ports:
