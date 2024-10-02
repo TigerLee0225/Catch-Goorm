@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 RUN python -m pip install --upgrade pip
 
 #권한 설정
-RUN chmod +x /manage.py
+RUN chmod +x manage.py
 
 #포트 노출
 EXPOSE 8000
