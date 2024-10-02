@@ -5,7 +5,7 @@ services:
 #      - .:/app
       - static_volume:/app/static
       - media_volume:/app/media  # 미디어 파일 경로 추가
-      - ./db.sqlite3:/app/db.sqlite3  # SQLite 데이터베이스 파일
+#      - ./db.sqlite3:/app/db.sqlite3  # SQLite 데이터베이스 파일
     expose:
       - "8000"
     ports:
@@ -29,7 +29,7 @@ services:
 volumes:
   static_volume:
   media_volume:  # 미디어 파일 저장소 추가
-  ./db.sqlite3:
+
 
 
 # version: '3.8'
